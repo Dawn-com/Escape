@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to the Dark Forest</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(45deg, #0a0a0a, #1a2a1a); /* Dark gradient background */
+    color: #eee;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .container {
+    background-color: rgba(40, 50, 40, 0.9); /* Semi-transparent dark green */
+    padding: 40px 60px;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(20, 80, 30, 0.8); /* Deep green glow */
+    border: 1px solid rgba(50, 120, 50, 0.3); /* Subtle border */
+    backdrop-filter: blur(5px); /* Frosted glass effect */
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    font-size: 2.8em;
+    margin-bottom: 25px;
+    color: #e8f0e8;
+    text-shadow: 0 0 15px rgba(245, 3, 3, 0.7), 
+                 0 0 30px rgba(241, 26, 7, 0.5),
+                 2px 2px 4px rgba(255, 4, 4, 0.8); /* Layered glowing effect */
+    letter-spacing: 2px;
+  }
+
+  p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    color: #ccd;
+    max-width: 600px;
+  }
+
+  .button {
+    display: inline-block;
+    padding: 14px 28px;
+    background-color: #2a5a2a; /* Dark forest green */
+    color: #e0ffe0;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(100, 200, 100, 0.3);
+    text-shadow: 0 0 8px rgba(100, 255, 100, 0.3);
+    box-shadow: 0 0 15px rgba(50, 150, 50, 0.3);
+  }
+
+  .button:hover {
+    background-color: #3a6a3a;
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(50, 200, 50, 0.5);
+  }
+
+  /* Add subtle animated background elements */
+  .forest-effect {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 50px,
+      rgba(50, 100, 50, 0.1) 50px,
+      rgba(50, 100, 50, 0.1) 100px
+    );
+    animation: forestMove 20s linear infinite;
+  }
+
+  @keyframes forestMove {
+    from { background-position: 0 0; }
+  }
+</style>
+</head>
+<body>
+  <div class="forest-effect"></div>
+  <div class="container">
+    <h1>Welcome to the Dark Forest</h1>
+    <p>Embark on a mysterious adventure through ancient, shadowed woods. Navigate twisting paths using arrow keys, collect mystical artifacts to survive the lurking dangers, and discover secrets hidden in the eternal twilight. How long can you endure the forest's whispers?</p>
+    <a href="map.html" class="button">Enter the Forest</a>
+  </div>
+</body>
+</html>

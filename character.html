@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Selection</title>
+</head>
+<style>
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    margin: 0;
+    padding: 20px;
+}
+
+.character-selection {
+    text-align: center;
+}
+
+.character-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.character-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #333;
+    border: 2px solid #555;
+    border-radius: 10px;
+    padding: 20px;
+    width: 200px;
+    text-align: left;
+}
+
+.character-card h2 {
+    font-size: 2em;
+    margin-bottom: 25px;
+    color: #fefffe;
+    text-shadow: 0 0 30px rgba(0, 255, 251, 0.7), 
+                 0 0 50px rgb(1, 0, 0),
+                 0 0 20px rgba(255, 255, 255, 0.8); /* Layered glowing effect */
+    letter-spacing: 2px;
+}
+
+
+.select-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #2a5a2a; /* Dark forest green */
+    color: #e0ffe0;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid rgba(100, 200, 100, 0.3);
+    text-shadow: 0 0 8px rgba(100, 255, 100, 0.3);
+    box-shadow: 0 0 15px rgba(50, 150, 50, 0.3);
+    margin-top: auto;
+    width: 60%;
+    box-sizing: content-box;
+}
+
+.select-button{
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+.select-button:hover {
+    background-color: #def106a5;
+}
+
+</style>
+<body>
+    <div class="character-selection">
+        <h1>Choose Your Character</h1>
+        <div class="character-cards">
+            <!-- Warrior -->
+            <div class="character-card" data-character="warrior">
+                <h2>Warrior</h2>
+                <p><strong>Ability:</strong> Double Attack</p>
+                <p><strong>Detriment:</strong> Cannot disengage until combat ends</p>
+                <a href="map.html?character=warrior" class="select-button">Select Warrior</a>            </div>
+
+            <!-- Tank -->
+            <div class="character-card" data-character="tank">
+                <h2>Tank</h2>
+                <p><strong>Ability:</strong> Anchor (halves incoming damage)</p>
+                <p><strong>Detriment:</strong> Cannot disengage; damage reduction decreases over time</p>
+                <a href="map.html?character=tank" class="select-button">Select Tank</a>            </div>
+
+            <!-- Ninja -->
+            <div class="character-card" data-character="ninja">
+                <h2>Ninja</h2>
+                <p><strong>Ability:</strong> Dodge (50/50 chance to avoid damage)</p>
+                <p><strong>Detriment:</strong> Next attack deals half damage</p>
+                <a href="map.html?character=Ninja" class="select-button">Select Ninja</a>            </div>
+
+            <!-- Medic -->
+            <div class="character-card" data-character="medic">
+                <h2>Medic</h2>
+                <p><strong>Ability:</strong> Heal (regenerate HP equal to strength)</p>
+                <p><strong>Detriment:</strong> Attack strength halved for that round</p>
+                <a href="map.html?character=Medic" class="select-button">Select Medic</a>            </div>
+
+            <!-- Athlete -->
+            <div class="character-card" data-character="athlete">
+                <h2>Athlete</h2>
+                <p><strong>Ability:</strong> Sprint (disengage from combat)</p>
+                <p><strong>Detriment:</strong> Can only be used after the first round</p>
+                <a href="map.html?character=Athlete" class="select-button">Select Athlete</a>            </div>
+        </div>
+    </div>
+</body>
+</html>

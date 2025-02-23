@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Forest Explorer</title>
+    <style>
+        :root {
+            --primary-green: #33ff33;
+            --dark-bg: #121212;
+            --status-bg: rgba(0, 20, 0, 0.9);
+            --cell-size: 8px;
+            --padding: 20px;
+            --border-radius: 8px;
+            --border-width: 2px;
+            --box-shadow: 0 0 15px rgba(51, 255, 51, 0.2);
+            --font-family: 'Courier New', monospace;
+            --font-size: 16px;
+            --inventory-slot-height: 60px;
+            --map-size: 648px;
+            --chat-height: 120px;
+            --chat-padding: 20px;
+            --chat-border: 1px solid rgba(51, 255, 51, 0.3);
+        }
+
+        body {
+            margin: 0;
+            padding: var(--padding);
+            background-color: var(--dark-bg);
+            color: var(--primary-green);
+            font-family: var(--font-family);
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            grid-template-rows: 1fr auto;
+            min-height: 100vh;
+            gap: var(--padding);
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+         .legend-panel {
+            display: flex;
+            flex-direction: column;
+            gap: var(--padding);
+        }
+
+        .terrain-box {
+            background: var(--status-bg);
+            padding: var(--padding);
+            border: var(--border-width) solid var(--primary-green);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .legend-icon {
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            font-size: var(--font-size);
+        }
+
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            background: var(--status-bg);
+            padding: var(--padding);
+            border: var(--border-width) solid var(--primary-green);
+            border-radius: var(--border-radius);
+        }
+
+        .inventory-slot {
+            background: #001100;
+            border: 1px solid var(--primary-green);
+            height: var(--inventory-slot-height);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            font-size: 24px;
+        }
+
+        .choice-container {
+            grid-column: 3;
+            background: var(--status-bg);
+            padding: var(--padding);
+            border: var(--border-width) solid var(--primary-green);
+            border-radius: var(--border-radius);
+            height: calc(100vh - var(--padding) * 4);
+        }
+
+        .choice-box {
+            background: #001100;
+            border: 1px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 4px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-family: var(--font-family);
+        }
+
+        .chat-messages {
+            height: var(--chat-height);
+            overflow-y: scroll;
+            overflow-x: hidden;
+            margin-bottom: 15px;
+            border: var(--chat-border);
+            padding: var(--chat-padding);
+            border-radius: 4px;
+            height: 300px;
+            width: 400px;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 5px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background-color: #eee;
+        }
+
+        .map-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .map-grid {
+            display: grid;
+            gap: 0;
+            background: #000;
+            padding: var(--padding);
+            border: 3px solid var(--primary-green);
+            border-radius: var(--border-radius);
+            box-shadow: 0 0 40px rgba(51, 255, 51, 0.3);
+            height: var(--map-size);
+            max-height: var(--map-size);
+            width: var(--map-size);
+            max-width: var(--map-size);
+            overflow: hidden;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cell {
+            text-align: center;
+        }
+
+        .grass { color: #175617; }
+        .tallGrass { color: #0c550c; }
+        .annis { color: #0066cc; }
+        .item { color: #ccaa44; }
+        .tree { color: #964B00; }
+        .wall { color: #888888; }
+        .enemy { color: #e82c2c; }
+        .player { color: #ffffff; animation: pulse 1s infinite; }
+        .empty { color: #000000; }
+        .gate { color: #ffcc00; }   
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Panel -->
+    <div class="legend-panel">
+        <div class="terrain-box">
+            <h3>TERRAIN LEGEND</h3>
+            <div class="legend-item">
+                <div class="legend-icon grass">Y</div>
+                <span>Grass</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon tree">T</div>
+                <span>Trees</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon item">@</div>
+                <span>Items</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon enemy">D</div>
+                <span>Enemies</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon annis">A</div>
+                <span>Black Annis</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon wall">X</div>
+                <span>Border Wall</span>
+            </div>
+        </div>
+
+        <div class="inventory-grid">
+            <div class="inventory-slot"></div>
+            <div class="inventory-slot"></div>
+            <div class="inventory-slot"></div>
+            <div class="inventory-slot"></div>
+            <div class="inventory-slot"></div>
+            <div class="inventory-slot"></div>
+            <div class="inventory-slot"></div>
+            <div class="inventory-slot"></div>
+            <div class="inventory-slot"></div>
+            <div class="inventory-slot"></div>
+        </div>
+    </div>
+
+    <div class="map-container">
+        <div id="gameMap" class="map-grid">
+        </div>
+    </div>
+
+    <div class="choice-container">
+        <p id ="gameText" class="chat-messages"></p>
+        <div id="pickupButton"class="choice-box">Pickup Item</div>
+        <div id="attackButton" class="choice-box">Attack</div>
+        <div id="abilityButton"class="choice-box">Special Ability (placeholdder)</div>
+        <div id="disengageButton" class="choice-box">Disengage</div>
+        <div id="hideButton" class="choice-box">Hide</div>
+    </div>
+</body>
+<script src="scripts/fight.js"></script>
+<script src="scripts/inventory.js"></script>
+<script src="scripts/enemies.js"></script>
+<script src="scripts/boss.js"></script>
+<script src="scripts/input.js"></script>
+<script src="scripts/texts.js"></script>
+<script src="scripts/player.js"></script>
+<script src="scripts/map.js"></script>
+<script src="scripts/textControl.js"></script>
+<script src="scripts/game.js"></script>
+</html>
